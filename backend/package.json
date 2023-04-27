@@ -29,7 +29,7 @@
   "scripts": {
     "start": "ts-node src/index.ts",
     "dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules src/server.ts",
-    "typeorm": "typeorm-ts-node-commonjs",
+    "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js",
     "lint": "eslint . --ext .ts"
   }
 }
