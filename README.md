@@ -2,6 +2,8 @@
 
 small tasks big achievements
 
+[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)]()
+
 ## technologies used
 
 - backend :
