@@ -3,15 +3,21 @@ import { CreateUserDto, UpdateUserDto } from '../models/dtos';
 import { IUser } from '../models/interfaces';
 import UserAppRepository from '../models/repository';
 import UserApp from '../models/entity/user_app.entity';
+import { compare, hash } from 'bcryptjs';
 
 export default class UserService {
   async create(user: CreateUserDto): Promise<IUser | undefined> {
-    const { email } = user;
+    const { email, password } = user;
     const userWithEmailEqual = await this.getUserByEmail(email);
     if (userWithEmailEqual) {
       return undefined;
     }
-    return await UserAppRepository.save(user);
+    const passwordencrypt = await hash(password, 9);
+    const userCripted = {
+      ...user,
+      password: passwordencrypt,
+    };
+    return await UserAppRepository.save(userCripted);
   }
 
   async getUserById(id: number): Promise<IUser | null> {
@@ -30,14 +36,9 @@ export default class UserService {
   }
 
   async delete(id: number): Promise<boolean> {
-    const userExists = this.getUserById(id);
+    const userExists = await this.getUserById(id);
     if (userExists) {
-      //conversion rapida de tipo
-      const userRemover = {
-        ...userExists,
-      } as unknown as UserApp;
-
-      await UserAppRepository.remove(userRemover);
+      await UserAppRepository.remove(userExists);
       return true;
     }
     return false;
@@ -45,6 +46,21 @@ export default class UserService {
 
   async getUserByEmail(email: string): Promise<IUser> {
     return await UserAppRepository.findOne({ where: { email } });
+  }
+
+  async verifiPassword(
+    email: string,
+    passwordUser: string,
+  ): Promise<IUser | undefined> {
+    const userExist = await this.getUserByEmail(email);
+    if (userExist) {
+      const userCorret = await compare(passwordUser, userExist.password);
+      if (userCorret) {
+        return userExist;
+      }
+      return undefined;
+    }
+    return undefined;
   }
 
   // async getAllUser(): Promise<IUser[]> {
