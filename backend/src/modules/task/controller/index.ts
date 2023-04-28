@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
 import TaskService from '../service';
-import { CreateTaskDto } from '../models/dtos';
 
 export default class TaskController {
   private _taskService: TaskService;
@@ -10,12 +9,9 @@ export default class TaskController {
 
   public create = async (request: Request, response: Response) => {
     const task = request.body;
-    if (!isNaN(task)) {
-      task as CreateTaskDto;
-      const taskCreated = await this._taskService.create(task);
-      if (taskCreated) {
-        return response.json(taskCreated).status(201);
-      }
+    const taskCreated = await this._taskService.create(task);
+    if (taskCreated) {
+      return response.json(taskCreated).status(201);
     }
     return response
       .json({
