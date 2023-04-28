@@ -5,7 +5,12 @@ import UserAppRepository from '../models/repository';
 import UserApp from '../models/entity/user_app.entity';
 
 export default class UserService {
-  async create(user: CreateUserDto): Promise<IUser> {
+  async create(user: CreateUserDto): Promise<IUser | undefined> {
+    const { email } = user;
+    const userWithEmailEqual = await this.getUserByEmail(email);
+    if (userWithEmailEqual) {
+      return undefined;
+    }
     return await UserAppRepository.save(user);
   }
 
@@ -37,6 +42,11 @@ export default class UserService {
     }
     return false;
   }
+
+  async getUserByEmail(email: string): Promise<IUser> {
+    return await UserAppRepository.findOne({ where: { email } });
+  }
+
   // async getAllUser(): Promise<IUser[]> {
   //   return await UserAppRepository.find();
   // }
