@@ -42,8 +42,8 @@ export default class TaskService {
     return false;
   }
 
-  async getAllTaskById(id: number): Promise<ITask[] | null> {
-    return await TaskRepository.find({ where: { id } });
+  async getAllTaskUserById(idUser: number): Promise<ITask[]> {
+    return await TaskRepository.find({ where: { idUser } });
   }
 
   async countAllTaskById(id: number): Promise<number> {
