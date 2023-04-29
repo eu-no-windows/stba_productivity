@@ -11,6 +11,7 @@
     "sourceMap": true,
     "esModuleInterop": true,
     "baseUrl": "./",
+    "typeRoots": ["@types", "./node_modules/@types"],
     "paths": {
       "@config/*": ["src/config/*"],
       "@modules/*": ["src/modules/*"],

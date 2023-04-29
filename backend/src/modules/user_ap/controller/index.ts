@@ -46,7 +46,7 @@ export default class UserCotroller {
     const userId = parseInt(request.params.id);
     const result = await this._userService.delete(userId);
     if (result) {
-      return response.status(204);
+      return response.json({ message: 'user deleted' }).status(204);
     }
     return response
       .json({ message: 'delete was not allowed or resource does not exist.' })
