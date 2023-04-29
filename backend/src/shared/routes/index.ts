@@ -1,9 +1,12 @@
 import TaskController from '@modules/task/controller';
 import UserCotroller from '@modules/user_ap/controller';
+import SessionController from '@modules/user_ap/controller/session';
+import isAuthenticated from '@modules/user_ap/middleware';
 import { Request, Response, Router } from 'express';
 
 const userController = new UserCotroller();
 const taskController = new TaskController();
+const sessionController = new SessionController();
 const routes = Router();
 routes.get(
   '/',
@@ -30,6 +33,11 @@ routes.get(
               GET_ALL_TASK_USER: '/api/v1/task/user/:id',
             },
           },
+          {
+            session: {
+              POST: '/api/v1/session',
+            },
+          },
         ],
       })
       .status(200),
@@ -39,7 +47,7 @@ routes.get(
 routes.post('/api/v1/user', userController.create);
 routes.get('/api/v1/user/:id', userController.getOne);
 routes.patch('/api/v1/user/:id', userController.update);
-routes.delete('/api/v1/user/:id', userController.delete);
+routes.delete('/api/v1/user/:id', isAuthenticated, userController.delete);
 
 //Routes od Tasks
 routes.get('/api/v1/task', taskController.get);
@@ -49,5 +57,8 @@ routes.patch('/api/v1/task/:id', taskController.update);
 routes.delete('/api/v1/task/:id', taskController.delete);
 routes.get('/api/v1/task/:id', taskController.countTask);
 routes.get('/api/v1/task/user/:id', taskController.getTaskUser);
+
+//Auth
+routes.post('/api/v1/session', sessionController.create);
 
 export default routes;

@@ -22,7 +22,7 @@ export default class TaskController {
   };
 
   public get = async (request: Request, response: Response) => {
-    const tasklist = await this._taskService.getAllTask;
+    const tasklist = await this._taskService.getAllTask();
     return response.json(tasklist).status(200);
   };
 
@@ -51,7 +51,7 @@ export default class TaskController {
     const taskId = parseInt(request.params.id);
     const result = await this._taskService.delete(taskId);
     if (result) {
-      return response.status(204);
+      return response.json({ message: 'task deleted' }).status(204);
     }
     return response
       .json({ message: 'delete was not allowed or resource does not exist.' })

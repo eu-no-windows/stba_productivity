@@ -29,14 +29,9 @@ export default class TaskService {
   }
 
   async delete(id: number): Promise<boolean> {
-    const taskExists = this.getTaskById(id);
+    const taskExists = await this.getTaskById(id);
     if (taskExists) {
-      //conversion rapida de tipo
-      const taskRemover = {
-        ...taskExists,
-      } as unknown as Task;
-
-      await TaskRepository.remove(taskRemover);
+      await TaskRepository.remove(taskExists);
       return true;
     }
     return false;
