@@ -1,7 +1,9 @@
+import Task from '@modules/task/models/entity/task.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
@@ -30,4 +32,12 @@ export default class UserApp {
 
   @Column()
   numeroCelular: string;
+
+  @OneToMany(
+    () => Task,
+    task => {
+      task.id;
+    },
+  )
+  tasks: Task[];
 }
