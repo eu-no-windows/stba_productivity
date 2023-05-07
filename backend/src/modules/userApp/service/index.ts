@@ -1,12 +1,11 @@
 import { UpdateResult } from 'typeorm';
 import { CreateUserDto, UpdateUserDto } from '../models/dtos';
-import { IUser } from '../models/interfaces';
 import UserAppRepository from '../models/repository';
-import UserApp from '../models/entity/user_app.entity';
 import { compare, hash } from 'bcryptjs';
+import UserApp from '../models/entity';
 
 export default class UserService {
-  async create(user: CreateUserDto): Promise<IUser | undefined> {
+  async create(user: CreateUserDto): Promise<UserApp | undefined> {
     const { email, password } = user;
     const userWithEmailEqual = await this.getUserByEmail(email);
     if (userWithEmailEqual) {
@@ -20,7 +19,7 @@ export default class UserService {
     return await UserAppRepository.save(userCripted);
   }
 
-  async getUserById(id: number): Promise<IUser | null> {
+  async getUserById(id: number): Promise<UserApp | null> {
     return await UserAppRepository.findOne({ where: { id } });
   }
 
@@ -44,14 +43,14 @@ export default class UserService {
     return false;
   }
 
-  async getUserByEmail(email: string): Promise<IUser> {
+  async getUserByEmail(email: string): Promise<UserApp> {
     return await UserAppRepository.findOne({ where: { email } });
   }
 
   async verifiPassword(
     email: string,
     passwordUser: string,
-  ): Promise<IUser | undefined> {
+  ): Promise<UserApp | undefined> {
     const userExist = await this.getUserByEmail(email);
     if (userExist) {
       const userCorret = await compare(passwordUser, userExist.password);
@@ -63,7 +62,7 @@ export default class UserService {
     return undefined;
   }
 
-  // async getAllUser(): Promise<IUser[]> {
+  // async getAllUser(): Promise<User[]> {
   //   return await UserAppRepository.find();
   // }
 }

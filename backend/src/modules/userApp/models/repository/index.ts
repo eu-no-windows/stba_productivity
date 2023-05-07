@@ -1,4 +1,4 @@
-import UserApp from '../entity/user_app.entity';
+import UserApp from '../entity';
 import { AppDataSource } from 'src/database/data-source';
 
 const UserAppRepository = AppDataSource.getRepository(UserApp);

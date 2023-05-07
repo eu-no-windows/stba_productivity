@@ -4,6 +4,10 @@ small tasks big achievements
 
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)]()
 
+## Models
+
+[model of app](https://www.figma.com/file/sAd3YjmgQIJPQXXidDJcZP/Cores-Base?node-id=0%3A1&t=5zNvL1a4gGJbKFbG-1)
+
 ## technologies used
 
 - backend :
@@ -12,8 +16,7 @@ small tasks big achievements
 
 - frontend :
 
-<img height="50" src="https://user-images.githubusercontent.com/25181517/183897015-94a058a6-b86e-4e42-a37f-bf92061753e5.png">
-<img height="50" src="https://user-images.githubusercontent.com/25181517/187896150-cc1dcb12-d490-445c-8e4d-1275cd2388d6.png">
+<img height="50" src="https://user-images.githubusercontent.com/25181517/183897015-94a058a6-b86e-4e42-a37f-bf92061753e5.png"><img height="50" src="https://user-images.githubusercontent.com/25181517/187896150-cc1dcb12-d490-445c-8e4d-1275cd2388d6.png">
 
 - mobile :
 

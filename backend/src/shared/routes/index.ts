@@ -1,7 +1,7 @@
 import TaskController from '@modules/task/controller';
-import UserCotroller from '@modules/user_ap/controller';
-import SessionController from '@modules/user_ap/controller/session';
-import isAuthenticated from '@modules/user_ap/middleware';
+import UserCotroller from '@modules/userApp/controller';
+import SessionController from '@modules/userApp/controller/session';
+import isAuthenticated from '@modules/userApp/middleware';
 import { Request, Response, Router } from 'express';
 
 const userController = new UserCotroller();

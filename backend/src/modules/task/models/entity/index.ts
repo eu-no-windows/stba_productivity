@@ -1,7 +1,9 @@
+import UserApp from '@modules/userApp/models/entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
@@ -19,6 +21,6 @@ export default class Task {
   @Column()
   descricao: string;
 
-  @Column()
-  idUser: number;
+  @ManyToOne(() => UserApp, user => user.id)
+  idUser: UserApp | number;
 }
