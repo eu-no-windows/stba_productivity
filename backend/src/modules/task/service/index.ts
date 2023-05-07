@@ -1,19 +1,18 @@
 import { UpdateResult } from 'typeorm';
 import { CreateTaskDto, UpdateTaskDto } from '../models/dtos';
-import { ITask } from '../models/interfaces';
 import TaskRepository from '../models/repository';
-import Task from '../models/entity/task.entity';
+import Task from '../models/entity';
 
 export default class TaskService {
-  async create(task: CreateTaskDto): Promise<ITask> {
+  async create(task: CreateTaskDto): Promise<Task> {
     return await TaskRepository.save(task);
   }
 
-  async getTaskById(id: number): Promise<ITask | null> {
+  async getTaskById(id: number): Promise<Task | null> {
     return await TaskRepository.findOne({ where: { id } });
   }
 
-  async getAllTask(): Promise<ITask[]> {
+  async getAllTask(): Promise<Task[]> {
     return await TaskRepository.find();
   }
 
@@ -37,7 +36,7 @@ export default class TaskService {
     return false;
   }
 
-  async getAllTaskUserById(idUser: number): Promise<ITask[]> {
+  async getAllTaskUserById(idUser: number): Promise<Task[]> {
     return await TaskRepository.find({ where: { idUser } });
   }
 

@@ -1,4 +1,4 @@
-import UserApp from '@modules/user_ap/models/entity/user_app.entity';
+import UserApp from '@modules/userApp/models/entity';
 import {
   Column,
   CreateDateColumn,
@@ -22,5 +22,5 @@ export default class Task {
   descricao: string;
 
   @ManyToOne(() => UserApp, user => user.id)
-  idUser: UserApp;
+  idUser: UserApp | number;
 }

@@ -1,4 +1,4 @@
-import Task from '@modules/task/models/entity/task.entity';
+import Task from '@modules/task/models/entity';
 import {
   Column,
   CreateDateColumn,
